@@ -251,34 +251,45 @@ const MovieDetailsPage = () => {
         </Typography>
         <Divider sx={{ mb: 2 }} />
         
-        <Grid container spacing={2}>
+        <Grid container spacing={3} sx={{ justifyContent: 'center' }}>
           {cast.length > 0 ? (
             cast.map((person) => (
-              <Grid item key={person.id} xs={6} sm={4} md={3} lg={2}>
-                <Paper elevation={3} sx={{ height: '100%' }}>
-                  <Box sx={{ position: 'relative', paddingTop: '150%' }}>
-                    <img 
-                      src={getImageUrl(person.profile_path) || '/placeholder-person.jpg'} 
-                      alt={person.name}
-                      style={{ 
-                        position: 'absolute', 
-                        top: 0, 
-                        left: 0, 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover' 
-                      }} 
-                    />
-                  </Box>
-                  <Box sx={{ p: 1 }}>
-                    <Typography variant="subtitle2" noWrap title={person.name}>
-                      {person.name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {person.character}
-                    </Typography>
-                  </Box>
-                </Paper>
+              <Grid item key={person.id} xs={6} sm={4} md={3} lg={2} sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Box sx={{ width: '160px' }}>
+                  <Paper 
+                    elevation={3} 
+                    sx={{ 
+                      borderRadius: 2,
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                      '&:hover': {
+                        transform: 'translateY(-5px)',
+                        boxShadow: '0 10px 20px rgba(0,0,0,0.2)'
+                      }
+                    }}
+                  >
+                    <Box sx={{ width: '160px', height: '200px', display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', bgcolor: 'rgba(0,0,0,0.1)' }}>
+                      <img 
+                        src={getImageUrl(person.profile_path) || '/placeholder-person.jpg'} 
+                        alt={person.name}
+                        style={{ 
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          objectPosition: 'center top'
+                        }} 
+                      />
+                    </Box>
+                    <Box sx={{ p: 2, textAlign: 'center' }}>
+                      <Typography variant="subtitle2" noWrap title={person.name} sx={{ fontWeight: 'bold' }}>
+                        {person.name}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary" noWrap>
+                        {person.character}
+                      </Typography>
+                    </Box>
+                  </Paper>
+                </Box>
               </Grid>
             ))
           ) : (

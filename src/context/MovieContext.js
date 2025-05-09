@@ -10,6 +10,13 @@ const initialState = {
   error: null,
   searchQuery: '',
   darkMode: false,
+  genres: [],
+  filters: {
+    genre: '',
+    year: '',
+    rating: ''
+  },
+  filteredMovies: []
 };
 
 // Action types
@@ -23,6 +30,10 @@ export const ACTIONS = {
   SET_ERROR: 'SET_ERROR',
   SET_SEARCH_QUERY: 'SET_SEARCH_QUERY',
   TOGGLE_DARK_MODE: 'TOGGLE_DARK_MODE',
+  SET_GENRES: 'SET_GENRES',
+  SET_FILTERS: 'SET_FILTERS',
+  RESET_FILTERS: 'RESET_FILTERS',
+  SET_FILTERED_MOVIES: 'SET_FILTERED_MOVIES'
 };
 
 // Reducer function
@@ -57,6 +68,22 @@ const movieReducer = (state, action) => {
       const newMode = !state.darkMode;
       localStorage.setItem('darkMode', JSON.stringify(newMode));
       return { ...state, darkMode: newMode };
+    case ACTIONS.SET_GENRES:
+      return { ...state, genres: action.payload };
+    case ACTIONS.SET_FILTERS:
+      return { 
+        ...state, 
+        filters: { ...state.filters, ...action.payload },
+        loading: true
+      };
+    case ACTIONS.RESET_FILTERS:
+      return { 
+        ...state, 
+        filters: { genre: '', year: '', rating: '' },
+        filteredMovies: [] 
+      };
+    case ACTIONS.SET_FILTERED_MOVIES:
+      return { ...state, filteredMovies: action.payload, loading: false };
     default:
       return state;
   }

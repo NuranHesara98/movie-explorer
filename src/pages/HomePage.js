@@ -1,12 +1,17 @@
 import React, { useEffect, useContext } from 'react';
-import { Container, Typography, Grid, Box, CircularProgress } from '@mui/material';
+import { Container, Typography, Grid, Box, CircularProgress, Button } from '@mui/material';
 import { MovieContext, ACTIONS } from '../context/MovieContext';
 import MovieCard from '../components/MovieCard';
 import SearchBar from '../components/SearchBar';
+import MovieFilter from '../components/MovieFilter';
 import { getTrendingMovies } from '../services/api';
 
 const HomePage = () => {
-  const { trending, loading, error, dispatch } = useContext(MovieContext);
+  const { trending, filteredMovies, filters, loading, error, dispatch } = useContext(MovieContext);
+  
+  // Determine which movie list to display
+  const hasActiveFilters = Object.values(filters).some(filter => filter !== '' && filter !== 0);
+  const displayMovies = hasActiveFilters ? filteredMovies : trending;
 
   useEffect(() => {
     const fetchTrendingMovies = async () => {
@@ -64,8 +69,11 @@ const HomePage = () => {
         component="h2" 
         sx={{ mb: 3, borderBottom: 1, borderColor: 'divider', pb: 1 }}
       >
-        Trending Movies
+        {hasActiveFilters ? 'Filtered Movies' : 'Trending Movies'}
       </Typography>
+      
+      {/* Movie Filter Component */}
+      <MovieFilter />
 
       {loading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
@@ -74,12 +82,33 @@ const HomePage = () => {
       ) : error ? (
         <Typography color="error" align="center">{error}</Typography>
       ) : (
-        <Grid container spacing={3}>
-          {trending.map((movie) => (
-            <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3}>
-              <MovieCard movie={movie} />
-            </Grid>
-          ))}
+        <Grid container spacing={3} sx={{ justifyContent: 'center' }}>
+          {displayMovies.length > 0 ? (
+            displayMovies.map((movie) => (
+              <Grid item key={movie.id} xs={12} sm={6} md={4} lg={3} sx={{ display: 'flex' }}>
+                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                  <Box sx={{ width: '240px', maxWidth: '100%' }}>
+                    <MovieCard movie={movie} />
+                  </Box>
+                </Box>
+              </Grid>
+            ))
+          ) : (
+            <Box sx={{ width: '100%', py: 5, textAlign: 'center' }}>
+              <Typography variant="h6" color="textSecondary">
+                {hasActiveFilters ? 'No movies match your filters. Try adjusting your criteria.' : 'No movies found.'}
+              </Typography>
+              {hasActiveFilters && (
+                <Button 
+                  variant="outlined" 
+                  onClick={() => dispatch({ type: ACTIONS.RESET_FILTERS })}
+                  sx={{ mt: 2 }}
+                >
+                  Clear Filters
+                </Button>
+              )}
+            </Box>
+          )}
         </Grid>
       )}
     </Container>

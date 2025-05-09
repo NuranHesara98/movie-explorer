@@ -31,19 +31,31 @@ const MovieCard = ({ movie }) => {
   return (
     <Card 
       sx={{ 
-        height: '100%', 
+        width: '240px',
+        height: '450px', // Fixed height for all cards
         display: 'flex', 
         flexDirection: 'column',
         cursor: 'pointer',
         position: 'relative',
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+        '&:hover': {
+          transform: 'scale(1.03)',
+          boxShadow: '0 8px 16px rgba(0,0,0,0.2)'
+        },
+        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+        borderRadius: '8px',
       }}
       onClick={handleCardClick}
     >
       <CardMedia
         component="img"
-        height="300"
+        height="320"
         image={getImageUrl(movie.poster_path) || '/placeholder-image.jpg'}
         alt={movie.title}
+        sx={{
+          objectFit: 'cover',
+          objectPosition: 'center'
+        }}
       />
       <Box 
         sx={{ 
@@ -58,7 +70,7 @@ const MovieCard = ({ movie }) => {
           {isInFavorites ? <FavoriteIcon /> : <FavoriteBorderIcon />}
         </IconButton>
       </Box>
-      <CardContent sx={{ flexGrow: 1 }}>
+      <CardContent sx={{ flexGrow: 1, height: '100px', overflow: 'hidden' }}>
         <Typography gutterBottom variant="h6" component="div" noWrap>
           {movie.title}
         </Typography>

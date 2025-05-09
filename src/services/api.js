@@ -35,6 +35,32 @@ export const getMoviesByGenre = (genreId, page = 1) => {
   return api.get('/discover/movie', { params: { with_genres: genreId, page } });
 };
 
+export const getMoviesByFilters = (filters, page = 1) => {
+  const { genre, year, rating } = filters;
+  
+  // Prepare filter parameters
+  const params = { page };
+  
+  if (genre) {
+    params.with_genres = genre;
+  }
+  
+  if (year) {
+    params.primary_release_year = year;
+  }
+  
+  if (rating) {
+    params.vote_average = { gte: rating };
+    params['vote_count.gte'] = 50; // Ensure movies have a minimum number of votes
+  }
+  
+  return api.get('/discover/movie', { params });
+};
+
+export const getGenres = () => {
+  return api.get('/genre/movie/list');
+};
+
 // Utility functions for images
 export const getImageUrl = (path, size = 'w500') => {
   if (!path) return null;
