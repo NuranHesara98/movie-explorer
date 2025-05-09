@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Box, TextField, Button, Typography, Paper, Avatar } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
+import { MovieContext, ACTIONS } from '../context/MovieContext';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
