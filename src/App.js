@@ -11,6 +11,10 @@ import SearchResultsPage from './pages/SearchResultsPage';
 import FavoritesPage from './pages/FavoritesPage';
 import './App.css';
 
+/**
+ * Main App component that sets up routing and providers
+ * @returns {JSX.Element} The App component
+ */
 function App() {
   return (
     <BrowserRouter>
@@ -18,7 +22,10 @@ function App() {
         <CustomThemeProvider>
           <div className="App">
             <Routes>
+              {/* Public route for login page */}
               <Route path="/login" element={<LoginPage />} />
+              
+              {/* Protected routes - requires authentication */}
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={
                   <>
@@ -45,6 +52,8 @@ function App() {
                   </>
                 } />
               </Route>
+              
+              {/* Catch all other routes and redirect to root */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>
