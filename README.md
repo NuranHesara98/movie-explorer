@@ -1,7 +1,5 @@
 # Movie Explorer App
 
-![Movie Explorer App](https://i.imgur.com/JVkSJB7.png)
-
 A feature-rich web application for browsing, searching, and discovering movies using The Movie Database (TMDb) API. This project allows users to explore trending movies, search for specific titles, filter by genre/year/rating, view detailed information, and maintain a list of favorite movies.
 
 ## 🎬 Features
