@@ -1,9 +1,16 @@
+/**
+ * @file api.js
+ * @description Central service for interacting with The Movie Database (TMDb) API.
+ * This file handles all API requests to fetch movie data, including trending movies,
+ * search functionality, movie details, and filtered movies by various criteria.
+ */
+
 import axios from 'axios';
 
 // Base API configuration
-const API_KEY = process.env.REACT_APP_TMDB_API_KEY || ''; // We'll set this in .env file
-const BASE_URL = 'https://api.themoviedb.org/3';
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
+const API_KEY = process.env.REACT_APP_TMDB_API_KEY || ''; // API key stored in .env file for security
+const BASE_URL = 'https://api.themoviedb.org/3'; // TMDb API v3 base URL
+const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/'; // TMDb image CDN base URL
 
 // Create axios instance
 const api = axios.create({

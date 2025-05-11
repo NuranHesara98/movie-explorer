@@ -1,3 +1,11 @@
+/**
+ * @file HomePage.js
+ * @description Main landing page of the application that displays trending movies
+ * and provides search and filtering functionality. This component fetches trending
+ * movies on mount and displays either trending or filtered movies based on user
+ * selection.
+ */
+
 import React, { useEffect, useContext } from 'react';
 import { Container, Typography, Grid, Box, CircularProgress, Button } from '@mui/material';
 import { MovieContext, ACTIONS } from '../context/MovieContext';

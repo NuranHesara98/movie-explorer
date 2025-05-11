@@ -1,3 +1,10 @@
+/**
+ * @file MovieContext.js
+ * @description Global state management for the Movie Explorer application using React Context API.
+ * This file defines the state structure, actions, reducer function, and context provider
+ * that manages movie data, user preferences, and application state throughout the app.
+ */
+
 import React, { createContext, useReducer, useEffect } from 'react';
 
 // Initial state

@@ -1,3 +1,10 @@
+/**
+ * @file MovieCard.js
+ * @description Reusable card component that displays movie information including
+ * poster image, title, release year, and rating. Also handles adding/removing
+ * movies from favorites and navigation to the movie details page.
+ */
+
 import React, { useContext } from 'react';
 import { Card, CardContent, CardMedia, Typography, Box, IconButton, Rating, Chip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -6,16 +13,29 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { MovieContext, ACTIONS } from '../context/MovieContext';
 import { getImageUrl } from '../services/api';
 
+/**
+ * MovieCard Component - Displays a single movie in a card format
+ * @param {Object} props - Component props
+ * @param {Object} props.movie - Movie data object containing details like id, title, poster_path, etc.
+ */
 const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
   const { favorites, dispatch } = useContext(MovieContext);
 
+  // Check if this movie is in the user's favorites list
   const isInFavorites = favorites.some((favMovie) => favMovie.id === movie.id);
 
+  /**
+   * Navigate to the movie details page when the card is clicked
+   */
   const handleCardClick = () => {
     navigate(`/movie/${movie.id}`);
   };
 
+  /**
+   * Toggle the movie's favorite status
+   * @param {Event} e - The click event
+   */
   const handleFavoriteClick = (e) => {
     e.stopPropagation(); // Prevent card click when clicking the favorite button
     if (isInFavorites) {

@@ -1,3 +1,10 @@
+/**
+ * @file MovieFilter.js
+ * @description Component that provides filtering functionality for movies by genre, year,
+ * and rating. Features collapsible UI, interactive controls, and applies filters to the
+ * movie list displayed on the HomePage.
+ */
+
 import React, { useContext, useEffect, useState } from 'react';
 import { 
   Box, 

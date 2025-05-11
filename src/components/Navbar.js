@@ -1,3 +1,10 @@
+/**
+ * @file Navbar.js
+ * @description Main navigation component for the Movie Explorer app.
+ * Includes links to Home and Favorites pages, theme toggle functionality,
+ * and user authentication controls.
+ */
+
 import React, { useContext } from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton, Switch, Box, useMediaQuery, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -10,7 +17,12 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { MovieContext, ACTIONS } from '../context/MovieContext';
 
+/**
+ * Navbar component that handles navigation and theme toggling.
+ * @returns {JSX.Element} The Navbar component.
+ */
 const Navbar = () => {
+  // Get the current theme and media query for mobile devices.
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();

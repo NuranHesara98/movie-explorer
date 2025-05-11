@@ -1,3 +1,10 @@
+/**
+ * @file MovieDetailsPage.js
+ * @description Detailed view page for a single movie. Displays comprehensive movie information
+ * including poster, backdrop, overview, cast, rating, and release information.
+ * Also provides functionality to watch trailers and add/remove from favorites.
+ */
+
 import React, { useEffect, useContext, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Typography, Box, Grid, Button, Chip, CircularProgress, Paper, Rating, Divider } from '@mui/material';

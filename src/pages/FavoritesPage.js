@@ -1,3 +1,10 @@
+/**
+ * @file FavoritesPage.js
+ * @description Page component that displays all movies that the user has added to their favorites.
+ * It retrieves the favorites list from the MovieContext and displays them in a grid layout.
+ * If no favorites are found, it shows a message prompting the user to add some.
+ */
+
 import React, { useContext } from 'react';
 import { Container, Typography, Grid, Box, Button } from '@mui/material';
 import MovieCard from '../components/MovieCard';
